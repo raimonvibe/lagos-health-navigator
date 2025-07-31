@@ -113,7 +113,21 @@ function App() {
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             {quickActions.map((action, index) => (
-              <Button key={index} className={`${action.color} hover:opacity-90 text-white px-6 py-3`}>
+              <Button 
+                key={index} 
+                className={`${action.color} hover:opacity-90 text-white px-6 py-3`}
+                onClick={() => {
+                  const sectionMap: { [key: string]: string } = {
+                    'Find Hospitals': 'facilities-section',
+                    'Check Insurance': 'insurance-section', 
+                    'Emergency Guide': 'emergency-section'
+                  };
+                  const sectionId = sectionMap[action.label];
+                  if (sectionId) {
+                    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
                 <action.icon className="h-5 w-5 mr-2" />
                 {action.label}
               </Button>
@@ -123,7 +137,7 @@ function App() {
       </section>
 
       {/* Emergency Section */}
-      <section className="py-16 px-4 bg-red-50 dark:bg-red-950/20">
+      <section id="emergency-section" className="py-16 px-4 bg-red-50 dark:bg-red-950/20">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center p-3 bg-red-100 dark:bg-red-900/30 rounded-full mb-4">
@@ -141,7 +155,10 @@ function App() {
                 </CardHeader>
                 <CardContent className="text-center">
                   <p className="text-sm text-slate-600 dark:text-slate-400">{emergency.description}</p>
-                  <Button className="mt-3 bg-red-600 hover:bg-red-700 text-white w-full">
+                  <Button 
+                    className="mt-3 bg-red-600 hover:bg-red-700 text-white w-full"
+                    onClick={() => window.open(`tel:${emergency.number}`, '_self')}
+                  >
                     <Phone className="h-4 w-4 mr-2" />
                     Call Now
                   </Button>
@@ -153,7 +170,7 @@ function App() {
       </section>
 
       {/* Healthcare Facility Finder */}
-      <section className="py-16 px-4">
+      <section id="facilities-section" className="py-16 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center p-3 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4">
@@ -206,7 +223,13 @@ function App() {
                       ))}
                     </div>
                   </div>
-                  <Button className="w-full mt-4 bg-primary hover:bg-primary-600">
+                  <Button 
+                    className="w-full mt-4 bg-primary hover:bg-primary-600"
+                    onClick={() => {
+                      const encodedAddress = encodeURIComponent(facility.address);
+                      window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
+                    }}
+                  >
                     <MapPin className="h-4 w-4 mr-2" />
                     Get Directions
                   </Button>
@@ -218,7 +241,7 @@ function App() {
       </section>
 
       {/* Insurance Navigator */}
-      <section className="py-16 px-4 bg-slate-50 dark:bg-slate-800/50">
+      <section id="insurance-section" className="py-16 px-4 bg-slate-50 dark:bg-slate-800/50">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center p-3 bg-secondary-100 dark:bg-secondary-900/30 rounded-full mb-4">
@@ -254,7 +277,10 @@ function App() {
                     <span>Reduced wait times (15-20 minutes)</span>
                   </li>
                 </ul>
-                <Button className="w-full mt-6 bg-secondary hover:bg-secondary-600">
+                <Button 
+                  className="w-full mt-6 bg-secondary hover:bg-secondary-600"
+                  onClick={() => window.open('https://www.lashmaregulations.com.ng/', '_blank')}
+                >
                   <Shield className="h-4 w-4 mr-2" />
                   Register for LASHMA
                 </Button>
@@ -332,8 +358,22 @@ function App() {
               <ul className="space-y-2 text-sm text-slate-400">
                 <li><a href="https://www.lashmaregulations.com.ng/" target="_blank" rel="noopener noreferrer" className="hover:text-primary">LASHMA Registration</a></li>
                 <li><a href="https://lagosministryofhealth.org/" target="_blank" rel="noopener noreferrer" className="hover:text-primary">Lagos Ministry of Health</a></li>
-                <li>Find Hospitals</li>
-                <li>Insurance Guide</li>
+                <li>
+                  <button 
+                    className="hover:text-primary cursor-pointer bg-transparent border-none text-sm text-slate-400 p-0"
+                    onClick={() => document.getElementById('facilities-section')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    Find Hospitals
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    className="hover:text-primary cursor-pointer bg-transparent border-none text-sm text-slate-400 p-0"
+                    onClick={() => document.getElementById('insurance-section')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    Insurance Guide
+                  </button>
+                </li>
               </ul>
             </div>
             <div>
