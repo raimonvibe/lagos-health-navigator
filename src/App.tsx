@@ -406,7 +406,7 @@ function HomePage() {
       {/* Footer */}
       <footer className="py-12 px-4 bg-slate-900 dark:bg-slate-950 text-white">
         <div className="container mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-5 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-4">
                 <div className="p-2 bg-primary rounded-lg">
@@ -476,6 +476,51 @@ function HomePage() {
                   </Link>
                 </li>
               </ul>
+            </div>
+            <div>
+              <h5 className="font-semibold mb-4">Connect with Raimon</h5>
+              <div className="grid grid-cols-4 gap-3">
+                <a href="https://x.com/raimonvibe/" target="_blank" rel="noopener noreferrer" 
+                   className="flex items-center justify-center w-10 h-10 bg-slate-800 hover:bg-blue-500 rounded-lg transition-colors duration-200">
+                  <i className="fa-brands fa-x-twitter text-white"></i>
+                  <span className="sr-only">X</span>
+                </a>
+                <a href="https://www.youtube.com/channel/UCDGDNuYb2b2Ets9CYCNVbuA/videos/" target="_blank" rel="noopener noreferrer"
+                   className="flex items-center justify-center w-10 h-10 bg-slate-800 hover:bg-red-500 rounded-lg transition-colors duration-200">
+                  <i className="fab fa-youtube text-white"></i>
+                  <span className="sr-only">YouTube</span>
+                </a>
+                <a href="https://www.tiktok.com/@raimonvibe/" target="_blank" rel="noopener noreferrer"
+                   className="flex items-center justify-center w-10 h-10 bg-slate-800 hover:bg-black rounded-lg transition-colors duration-200">
+                  <i className="fab fa-tiktok text-white"></i>
+                  <span className="sr-only">TikTok</span>
+                </a>
+                <a href="https://www.instagram.com/raimonvibe/" target="_blank" rel="noopener noreferrer"
+                   className="flex items-center justify-center w-10 h-10 bg-slate-800 hover:bg-pink-500 rounded-lg transition-colors duration-200">
+                  <i className="fab fa-instagram text-white"></i>
+                  <span className="sr-only">Instagram</span>
+                </a>
+                <a href="https://medium.com/@raimonvibe/" target="_blank" rel="noopener noreferrer"
+                   className="flex items-center justify-center w-10 h-10 bg-slate-800 hover:bg-green-500 rounded-lg transition-colors duration-200">
+                  <i className="fab fa-medium text-white"></i>
+                  <span className="sr-only">Medium</span>
+                </a>
+                <a href="https://github.com/raimonvibe/" target="_blank" rel="noopener noreferrer"
+                   className="flex items-center justify-center w-10 h-10 bg-slate-800 hover:bg-gray-700 rounded-lg transition-colors duration-200">
+                  <i className="fab fa-github text-white"></i>
+                  <span className="sr-only">GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/raimonvibe/" target="_blank" rel="noopener noreferrer"
+                   className="flex items-center justify-center w-10 h-10 bg-slate-800 hover:bg-blue-600 rounded-lg transition-colors duration-200">
+                  <i className="fab fa-linkedin-in text-white"></i>
+                  <span className="sr-only">LinkedIn</span>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61563450007849" target="_blank" rel="noopener noreferrer"
+                   className="flex items-center justify-center w-10 h-10 bg-slate-800 hover:bg-blue-700 rounded-lg transition-colors duration-200">
+                  <i className="fab fa-facebook-f text-white"></i>
+                  <span className="sr-only">Facebook</span>
+                </a>
+              </div>
             </div>
           </div>
           <div className="border-t border-slate-800 mt-8 pt-8 text-center text-sm text-slate-400">
