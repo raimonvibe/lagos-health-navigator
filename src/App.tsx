@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react'
+import { Routes, Route, Link } from 'react-router-dom'
 import { Sun, Moon, Phone, MapPin, Shield, Heart, Stethoscope, Clock, Users, Search, Star, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
+import HealthTips from './pages/HealthTips'
+import YoungAdultHealth from './pages/YoungAdultHealth'
+import MentalHealthSupport from './pages/MentalHealthSupport'
+import PreventiveCare from './pages/PreventiveCare'
 import './App.css'
 
-function App() {
+function HomePage() {
   const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
@@ -379,10 +384,26 @@ function App() {
             <div>
               <h5 className="font-semibold mb-4">Resources</h5>
               <ul className="space-y-2 text-sm text-slate-400">
-                <li>Health Tips</li>
-                <li>Young Adult Health</li>
-                <li>Mental Health Support</li>
-                <li>Preventive Care</li>
+                <li>
+                  <Link to="/health-tips" className="hover:text-primary transition-colors">
+                    Health Tips
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/young-adult-health" className="hover:text-primary transition-colors">
+                    Young Adult Health
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/mental-health-support" className="hover:text-primary transition-colors">
+                    Mental Health Support
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/preventive-care" className="hover:text-primary transition-colors">
+                    Preventive Care
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -392,6 +413,19 @@ function App() {
         </div>
       </footer>
     </div>
+  )
+}
+
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/health-tips" element={<HealthTips />} />
+      <Route path="/young-adult-health" element={<YoungAdultHealth />} />
+      <Route path="/mental-health-support" element={<MentalHealthSupport />} />
+      <Route path="/preventive-care" element={<PreventiveCare />} />
+    </Routes>
   )
 }
 
