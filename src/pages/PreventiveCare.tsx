@@ -1,10 +1,12 @@
-import { Shield, Calendar, Heart, Eye, Stethoscope, ArrowLeft, CheckCircle, Clock } from 'lucide-react'
+import { Shield, Calendar, Heart, Eye, Stethoscope, ArrowLeft, CheckCircle, Clock, Sun, Moon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Link } from 'react-router-dom'
+import { useDarkMode } from '@/contexts/DarkModeContext'
 
 export default function PreventiveCare() {
+  const { darkMode, toggleDarkMode } = useDarkMode()
   const screeningSchedule = [
     {
       ageGroup: "18-29 Years",
@@ -148,15 +150,25 @@ export default function PreventiveCare() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:bg-slate-900">
+    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-slate-900' : 'bg-gradient-to-br from-green-50 to-blue-50'}`}>
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
+        <div className="mb-8 flex justify-between items-start">
           <Link to="/">
             <Button variant="outline" className="mb-4">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Home
             </Button>
           </Link>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={toggleDarkMode}
+            className="p-2"
+          >
+            {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </Button>
+        </div>
+        <div className="mb-8">
           <div className="text-center">
             <div className="inline-flex items-center justify-center p-3 bg-green-100 dark:bg-green-900/30 rounded-full mb-4">
               <Shield className="h-8 w-8 text-green-600" />
@@ -273,7 +285,7 @@ export default function PreventiveCare() {
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-2">Covered Screenings</h4>
+                  <h4 className="font-semibold mb-2 text-slate-900 dark:text-white">Covered Screenings</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>• Annual health check-ups</li>
                     <li>• Blood pressure and diabetes screening</li>
@@ -282,7 +294,7 @@ export default function PreventiveCare() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">Health Promotion</h4>
+                  <h4 className="font-semibold mb-2 text-slate-900 dark:text-white">Health Promotion</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>• Health education programs</li>
                     <li>• Wellness workshops</li>
@@ -291,7 +303,7 @@ export default function PreventiveCare() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">Access Points</h4>
+                  <h4 className="font-semibold mb-2 text-slate-900 dark:text-white">Access Points</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>• 326+ Primary Health Centers</li>
                     <li>• Community health outreach</li>

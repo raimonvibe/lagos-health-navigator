@@ -1,10 +1,12 @@
-import { Brain, Heart, Phone, Users, ArrowLeft, CheckCircle, AlertCircle } from 'lucide-react'
+import { Brain, Heart, Phone, Users, ArrowLeft, CheckCircle, AlertCircle, Sun, Moon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Link } from 'react-router-dom'
+import { useDarkMode } from '@/contexts/DarkModeContext'
 
 export default function MentalHealthSupport() {
+  const { darkMode, toggleDarkMode } = useDarkMode()
   const mentalHealthServices = [
     {
       title: "Professional Counseling",
@@ -108,15 +110,25 @@ export default function MentalHealthSupport() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:bg-slate-900">
+    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-slate-900' : 'bg-gradient-to-br from-purple-50 to-blue-50'}`}>
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
+        <div className="mb-8 flex justify-between items-start">
           <Link to="/">
             <Button variant="outline" className="mb-4">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Home
             </Button>
           </Link>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={toggleDarkMode}
+            className="p-2"
+          >
+            {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </Button>
+        </div>
+        <div className="mb-8">
           <div className="text-center">
             <div className="inline-flex items-center justify-center p-3 bg-purple-100 dark:bg-purple-900/30 rounded-full mb-4">
               <Brain className="h-8 w-8 text-purple-600" />
@@ -229,7 +241,7 @@ export default function MentalHealthSupport() {
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-2">Professional Services</h4>
+                  <h4 className="font-semibold mb-2 text-slate-900 dark:text-white">Professional Services</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>• Lagos State Mental Health Hospital</li>
                     <li>• Private psychiatric clinics</li>
@@ -238,7 +250,7 @@ export default function MentalHealthSupport() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">Support Groups</h4>
+                  <h4 className="font-semibold mb-2 text-slate-900 dark:text-white">Support Groups</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>• Depression and anxiety support groups</li>
                     <li>• Addiction recovery programs</li>
@@ -247,7 +259,7 @@ export default function MentalHealthSupport() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">Online Resources</h4>
+                  <h4 className="font-semibold mb-2 text-slate-900 dark:text-white">Online Resources</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>• Mental health apps and platforms</li>
                     <li>• Online therapy sessions</li>
