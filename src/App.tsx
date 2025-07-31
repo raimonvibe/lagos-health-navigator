@@ -10,9 +10,11 @@ import YoungAdultHealth from './pages/YoungAdultHealth'
 import MentalHealthSupport from './pages/MentalHealthSupport'
 import PreventiveCare from './pages/PreventiveCare'
 import './App.css'
+import { useState } from 'react'
 
 function HomePage() {
   const { darkMode, toggleDarkMode } = useDarkMode()
+  const [searchQuery, setSearchQuery] = useState('')
 
   const emergencyNumbers = [
     { number: '122', label: 'Primary Emergency', description: '24/7 Federal Ministry of Health' },
@@ -55,6 +57,20 @@ function HomePage() {
       hours: '24/7'
     }
   ]
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      const query = `hospitals health centers clinics ${searchQuery.trim()} Lagos Nigeria`
+      const encodedQuery = encodeURIComponent(query)
+      window.open(`https://www.google.com/maps/search/${encodedQuery}`, '_blank')
+    }
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch()
+    }
+  }
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-slate-900' : 'bg-gradient-to-br from-primary-50 to-secondary-50'}`}>
@@ -164,12 +180,25 @@ function HomePage() {
             <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Find Healthcare Facilities</h3>
             <p className="text-slate-600 dark:text-slate-300 mb-8">Locate hospitals, clinics, and health centers near you</p>
             <div className="max-w-md mx-auto mb-8">
-              <div className="relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                <Input 
-                  placeholder="Search by location, facility name, or service..." 
-                  className="pl-10 py-3"
-                />
+              <div className="relative flex">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                  <Input 
+                    placeholder="Search by location, facility name, or service..." 
+                    className="pl-10 py-3 pr-4"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={handleKeyPress}
+                  />
+                </div>
+                <Button 
+                  onClick={handleSearch}
+                  className="ml-2 bg-primary hover:bg-primary-600 px-6"
+                  disabled={!searchQuery.trim()}
+                >
+                  <MapPin className="h-4 w-4 mr-2" />
+                  Search Maps
+                </Button>
               </div>
             </div>
           </div>
