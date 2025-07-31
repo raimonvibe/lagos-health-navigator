@@ -1,9 +1,11 @@
-import { Users, Heart, Brain, Shield, Smartphone, ArrowLeft, CheckCircle } from 'lucide-react'
+import { Users, Heart, Brain, Shield, Smartphone, ArrowLeft, CheckCircle, Sun, Moon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
+import { useDarkMode } from '@/contexts/DarkModeContext'
 
 export default function YoungAdultHealth() {
+  const { darkMode, toggleDarkMode } = useDarkMode()
   const healthTopics = [
     {
       title: "Mental Health & Stress Management",
@@ -94,15 +96,25 @@ export default function YoungAdultHealth() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-secondary-50 to-accent-50 dark:bg-slate-900">
+    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-slate-900' : 'bg-gradient-to-br from-secondary-50 to-accent-50'}`}>
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
+        <div className="mb-8 flex justify-between items-start">
           <Link to="/">
             <Button variant="outline" className="mb-4">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Home
             </Button>
           </Link>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={toggleDarkMode}
+            className="p-2"
+          >
+            {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </Button>
+        </div>
+        <div className="mb-8">
           <div className="text-center">
             <div className="inline-flex items-center justify-center p-3 bg-secondary-100 dark:bg-secondary-900/30 rounded-full mb-4">
               <Users className="h-8 w-8 text-secondary" />
@@ -191,7 +203,7 @@ export default function YoungAdultHealth() {
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-2">Healthcare Access</h4>
+                  <h4 className="font-semibold mb-2 text-slate-900 dark:text-white">Healthcare Access</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>• LASHMA youth-friendly services</li>
                     <li>• University health centers</li>
@@ -200,7 +212,7 @@ export default function YoungAdultHealth() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">Mental Health Support</h4>
+                  <h4 className="font-semibold mb-2 text-slate-900 dark:text-white">Mental Health Support</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>• Campus counseling services</li>
                     <li>• Mental health helplines</li>
@@ -209,7 +221,7 @@ export default function YoungAdultHealth() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">Emergency Contacts</h4>
+                  <h4 className="font-semibold mb-2 text-slate-900 dark:text-white">Emergency Contacts</h4>
                   <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                     <li>• Emergency: 122, 199, 112</li>
                     <li>• Crisis helpline: Available 24/7</li>

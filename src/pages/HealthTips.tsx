@@ -1,9 +1,11 @@
-import { Heart, Apple, Dumbbell, Shield, Clock, CheckCircle, ArrowLeft } from 'lucide-react'
+import { Heart, Apple, Dumbbell, Shield, Clock, CheckCircle, ArrowLeft, Sun, Moon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
+import { useDarkMode } from '@/contexts/DarkModeContext'
 
 export default function HealthTips() {
+  const { darkMode, toggleDarkMode } = useDarkMode()
   const healthTips = [
     {
       category: "Nutrition",
@@ -64,15 +66,25 @@ export default function HealthTips() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 dark:bg-slate-900">
+    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-slate-900' : 'bg-gradient-to-br from-primary-50 to-secondary-50'}`}>
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
+        <div className="mb-8 flex justify-between items-start">
           <Link to="/">
             <Button variant="outline" className="mb-4">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Home
             </Button>
           </Link>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={toggleDarkMode}
+            className="p-2"
+          >
+            {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </Button>
+        </div>
+        <div className="mb-8">
           <div className="text-center">
             <div className="inline-flex items-center justify-center p-3 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4">
               <Heart className="h-8 w-8 text-primary" />
@@ -138,7 +150,7 @@ export default function HealthTips() {
           <CardContent>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <h4 className="font-semibold mb-2">LASHMA Benefits</h4>
+                <h4 className="font-semibold mb-2 text-slate-900 dark:text-white">LASHMA Benefits</h4>
                 <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                   <li>• Free basic healthcare at 326+ centers</li>
                   <li>• Cancer treatment coverage up to ₦5 million</li>
@@ -147,7 +159,7 @@ export default function HealthTips() {
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold mb-2">Health Hotlines</h4>
+                <h4 className="font-semibold mb-2 text-slate-900 dark:text-white">Health Hotlines</h4>
                 <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
                   <li>• Emergency: 122, 199, 112</li>
                   <li>• Lagos State Health Info: 0800-HEALTH</li>

@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
-import { Sun, Moon, Phone, MapPin, Shield, Heart, Stethoscope, Clock, Users, Search, Star, CheckCircle } from 'lucide-react'
+import { Sun, Moon, Phone, MapPin, Shield, Heart, Stethoscope, Clock, Users, Search, Star, CheckCircle, BookOpen, Brain, Apple } from 'lucide-react'
+import { useDarkMode } from './contexts/DarkModeContext'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -12,27 +12,7 @@ import PreventiveCare from './pages/PreventiveCare'
 import './App.css'
 
 function HomePage() {
-  const [darkMode, setDarkMode] = useState(false)
-
-  useEffect(() => {
-    const savedMode = localStorage.getItem('darkMode')
-    if (savedMode) {
-      setDarkMode(JSON.parse(savedMode))
-    }
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(darkMode))
-    if (darkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }, [darkMode])
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
+  const { darkMode, toggleDarkMode } = useDarkMode()
 
   const emergencyNumbers = [
     { number: '122', label: 'Primary Emergency', description: '24/7 Federal Ministry of Health' },
@@ -328,6 +308,97 @@ function HomePage() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Health Resources Section */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center p-3 bg-accent-100 dark:bg-accent-900/30 rounded-full mb-4">
+              <BookOpen className="h-8 w-8 text-accent" />
+            </div>
+            <h3 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Health Resources & Guides</h3>
+            <p className="text-slate-600 dark:text-slate-300">Comprehensive health information tailored for Lagos residents</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Link to="/health-tips" className="group">
+              <Card className="hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                <CardHeader className="text-center">
+                  <div className="inline-flex items-center justify-center p-3 bg-green-100 dark:bg-green-900/30 rounded-full mb-3 mx-auto">
+                    <Apple className="h-8 w-8 text-green-600" />
+                  </div>
+                  <CardTitle className="text-lg">Health Tips</CardTitle>
+                  <CardDescription>Daily wellness advice for Lagos living</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                    <li>• Nutrition &amp; Exercise</li>
+                    <li>• Preventive Care</li>
+                    <li>• Mental Wellness</li>
+                    <li>• Emergency Preparedness</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/young-adult-health" className="group">
+              <Card className="hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                <CardHeader className="text-center">
+                  <div className="inline-flex items-center justify-center p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-3 mx-auto">
+                    <Users className="h-8 w-8 text-blue-600" />
+                  </div>
+                  <CardTitle className="text-lg">Young Adult Health</CardTitle>
+                  <CardDescription>Health guidance for ages 18-35</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                    <li>• Mental Health &amp; Stress</li>
+                    <li>• Reproductive Health</li>
+                    <li>• Lifestyle &amp; Nutrition</li>
+                    <li>• Digital Wellness</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/mental-health-support" className="group">
+              <Card className="hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                <CardHeader className="text-center">
+                  <div className="inline-flex items-center justify-center p-3 bg-purple-100 dark:bg-purple-900/30 rounded-full mb-3 mx-auto">
+                    <Brain className="h-8 w-8 text-purple-600" />
+                  </div>
+                  <CardTitle className="text-lg">Mental Health Support</CardTitle>
+                  <CardDescription>Comprehensive mental wellness resources</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                    <li>• Professional Counseling</li>
+                    <li>• Crisis Support 24/7</li>
+                    <li>• Community Support</li>
+                    <li>• Self-Care Resources</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link to="/preventive-care" className="group">
+              <Card className="hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                <CardHeader className="text-center">
+                  <div className="inline-flex items-center justify-center p-3 bg-orange-100 dark:bg-orange-900/30 rounded-full mb-3 mx-auto">
+                    <Shield className="h-8 w-8 text-orange-600" />
+                  </div>
+                  <CardTitle className="text-lg">Preventive Care</CardTitle>
+                  <CardDescription>Stay healthy with regular screenings</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                    <li>• Health Screenings</li>
+                    <li>• Vaccinations</li>
+                    <li>• Early Detection</li>
+                    <li>• LASHMA Benefits</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </div>
       </section>
